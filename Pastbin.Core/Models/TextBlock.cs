@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Pastbin.Core.Models
 {
-    internal class TextBlock
+    public class TextBlock
     {
+        public Guid Id { get; }
+        public string Metadata { get; } = string.Empty;
     }
 }
