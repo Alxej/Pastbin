@@ -9,6 +9,9 @@ namespace Pastbin.Core.Models
     public class TextBlock
     {
         public Guid Id { get; }
-        public string Metadata { get; } = string.Empty;
+        public string Name { get; } = string.Empty;
+        public string Url { get; } = string.Empty;
+        public DateTime AddedAt { get; } = DateTime.Now;
+        public TimeOnly UrlLifeCycle { get; } = TimeOnly.MinValue;
     }
 }

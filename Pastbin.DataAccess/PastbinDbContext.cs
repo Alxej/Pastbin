@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Pastbin.DataAccess.Entites;
 
 namespace Pastbin.DataAccess
 {
@@ -14,5 +15,7 @@ namespace Pastbin.DataAccess
         {
             
         }
+
+        public DbSet<UserEntity> Users { get; set; }
     }
 }
