@@ -13,7 +13,23 @@ namespace Pastbin.DataAccess.Configurations
     {
         public void Configure(EntityTypeBuilder<TextBlockEntity> builder)
         {
+            builder.HasKey(x => x.Id);
+            
+            builder.Property(x => x.TextFileName)
+                .IsRequired();
 
+            builder.Property(x => x.Url)
+                .IsRequired();
+
+            builder.Property(x => x.AddedAt)
+                .IsRequired();
+
+            builder.Property(x => x.UrlLifeCycle)
+                .IsRequired();
+
+            builder.HasOne(x => x.Post)
+                .WithOne(x => x.Text)
+                .HasForeignKey("TextBlockEntity", "TextBlockId");
         }
     }
 }

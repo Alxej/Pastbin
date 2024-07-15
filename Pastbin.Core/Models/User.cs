@@ -12,7 +12,7 @@ namespace Pastbin.Core.Models
         public const int MAX_USERNAME_LENGTH = 32;
         public const int MAX_NAME_LENGTH = 256;
         public const int MAX_PASSWORD_LENGTH = 64;
-        private User(Guid id,string userName,string password, string name, string lastName, string surname) 
+        private User(Guid id, string userName,string password, string name, string lastName, string surname) 
         {
             Id = id;
             UserName = userName;
@@ -29,7 +29,9 @@ namespace Pastbin.Core.Models
         public string LastName { get; } = string.Empty;
         public string Surname { get; } = string.Empty;
 
-        public (User user, List<string> errors) Create(Guid id, string userName, string password, string name, string lastName, string surname)
+        public List<Post> Posts { get; } = new List<Post>();
+
+        public static (User User, List<string> Errors) Create(Guid id, string userName, string password, string name, string lastName, string surname)
         {
             var errors = new List<string>();
             

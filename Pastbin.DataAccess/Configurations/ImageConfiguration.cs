@@ -13,7 +13,23 @@ namespace Pastbin.DataAccess.Configurations
     {
         public void Configure(EntityTypeBuilder<ImageEntity> builder)
         {
+            builder.HasKey(x => x.Id);
 
+            builder.Property(x => x.Name)
+                .IsRequired();
+
+            builder.Property(x => x.Url)
+                .IsRequired();
+
+            builder.Property(x => x.AddedAt)
+                .IsRequired();
+
+            builder.Property(x => x.UrlLifeCycle)
+                .IsRequired();
+
+            builder.HasOne(x => x.Post)
+                .WithOne(x => x.Image)
+                .HasForeignKey("ImageEntity", "ImageId");
         }
     }
 }

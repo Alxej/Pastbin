@@ -13,7 +13,31 @@ namespace Pastbin.DataAccess.Configurations
     {
         public void Configure(EntityTypeBuilder<PostEntity> builder)
         {
+            builder.HasKey(e => e.Id);
 
+            builder.Property(x => x.Header)
+                .IsRequired();
+
+            builder.Property(x => x.AuthorId)
+                .IsRequired();
+            builder.HasOne(x => x.Author)
+                .WithMany(x => x.Posts)
+                .HasForeignKey(x => x.AuthorId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Property(x => x.ImageId)
+                .IsRequired();
+            builder.HasOne(x => x.Image)
+                .WithOne(x => x.Post)
+                .HasForeignKey("ImageEntity", "ImageId")
+                .OnDelete(DeleteBehavior.SetNull);
+
+            builder.Property(x => x.TextBlockId)
+                .IsRequired();
+            builder.HasOne(x => x.Text)
+                .WithOne(x => x.Post)
+                .HasForeignKey("TextBlockEntity", "TextBlockId")
+                .OnDelete(DeleteBehavior.SetNull);
         }
     }
 }

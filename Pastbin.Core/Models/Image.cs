@@ -22,7 +22,7 @@ namespace Pastbin.Core.Models
         public DateTime AddedAt { get; } = DateTime.Now;
         public TimeOnly UrlLifeCycle { get; } = TimeOnly.MinValue;
 
-        public (Image image, List<string> errors) Create(Guid id, string name, string url, DateTime addedAt, TimeOnly urlLifeCycle)
+        public (Image Image, List<string> Errors) Create(Guid id, string name, string url, DateTime addedAt, TimeOnly urlLifeCycle)
         {
             var errors = new List<string>();
 

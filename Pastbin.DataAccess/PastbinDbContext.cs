@@ -17,5 +17,8 @@ namespace Pastbin.DataAccess
         }
 
         public DbSet<UserEntity> Users { get; set; }
+        public DbSet<ImageEntity> Images { get; set; }
+        public DbSet<PostEntity> Posts { get; set; }
+        public DbSet<TextBlockEntity> TextBlocks { get; set; }
     }
 }
