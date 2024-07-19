@@ -34,11 +34,6 @@ namespace Pastbin.DataAccess.Configurations
 
             builder.Property(x => x.Surname)
                 .HasMaxLength(User.MAX_NAME_LENGTH);
-
-            builder.HasMany(x => x.Posts)
-                .WithOne(x => x.Author)
-                .HasForeignKey(x => x.AuthorId)
-                .OnDelete(DeleteBehavior.Cascade);
         }
             
     }

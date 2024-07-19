@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 using Pastbin.DataAccess.Entites;
+using Pastbin.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,28 +17,17 @@ namespace Pastbin.DataAccess.Configurations
             builder.HasKey(e => e.Id);
 
             builder.Property(x => x.Header)
+                .HasMaxLength(Post.MAX_HEADER_LENGTH)
                 .IsRequired();
 
             builder.Property(x => x.AuthorId)
                 .IsRequired();
-            builder.HasOne(x => x.Author)
-                .WithMany(x => x.Posts)
-                .HasForeignKey(x => x.AuthorId)
-                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Property(x => x.ImageId)
                 .IsRequired();
-            builder.HasOne(x => x.Image)
-                .WithOne(x => x.Post)
-                .HasForeignKey("ImageEntity", "ImageId")
-                .OnDelete(DeleteBehavior.SetNull);
 
             builder.Property(x => x.TextBlockId)
                 .IsRequired();
-            builder.HasOne(x => x.Text)
-                .WithOne(x => x.Post)
-                .HasForeignKey("TextBlockEntity", "TextBlockId")
-                .OnDelete(DeleteBehavior.SetNull);
         }
     }
 }

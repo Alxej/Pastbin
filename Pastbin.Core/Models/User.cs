@@ -36,20 +36,28 @@ namespace Pastbin.Core.Models
             var errors = new List<string>();
             
             if (userName.Length > MAX_USERNAME_LENGTH || string.IsNullOrEmpty(userName))
-                errors.Append("username length must be less than 33 symbols");
+                errors.Add("username length must be less than 33 symbols");
 
             if (password.Length > MAX_PASSWORD_LENGTH || string.IsNullOrEmpty(password))
-                errors.Append("password length must be less than 65 symbols");
+                errors.Add("password length must be less than 65 symbols");
 
             if (name.Length > MAX_NAME_LENGTH || lastName.Length > MAX_NAME_LENGTH || surname.Length > MAX_NAME_LENGTH)
-                errors.Append("full name parts lengths all must be less than 257 symbols");
+                errors.Add("full name parts lengths all must be less than 257 symbols");
 
-            byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(password);
-            var encryptedPassword = Convert.ToHexString(MD5.HashData(inputBytes));
+            var encryptedPassword = EncryptPassword(password);
 
             var user = new User(id, userName, encryptedPassword, name, lastName, surname);
 
             return (user, errors);
+        }
+
+        public static string EncryptPassword(string password)
+        {
+            byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(password);
+
+            var encryptedPassword = Convert.ToHexString(MD5.HashData(inputBytes));
+            
+            return encryptedPassword;
         }
     }
 }

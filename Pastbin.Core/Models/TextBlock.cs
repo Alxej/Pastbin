@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-
-namespace Pastbin.Core.Models
+﻿namespace Pastbin.Core.Models
 {
     public class TextBlock
     {
@@ -24,20 +17,20 @@ namespace Pastbin.Core.Models
         public DateTime AddedAt { get; } = DateTime.Now;
         public TimeOnly UrlLifeCycle { get; } = TimeOnly.MinValue;
 
-        public (TextBlock TextBlock, List<string> Errors) Create(Guid id, string textFileName, string url, DateTime addedAt, TimeOnly urlLifeCycle)
+        public static (TextBlock TextBlock, List<string> Errors) Create(Guid id, string textFileName, string url, DateTime addedAt, TimeOnly urlLifeCycle)
         {
             var errors = new List<string>();
 
             var bannedSymbols = new List<char>() { '\\', '/', ':', '?', '\"', '<', '>', '|' };
 
             if (bannedSymbols.Any(x => textFileName.Contains(x)))
-                errors.Append("text file name contains banned symbols");
+                errors.Add("text file name contains banned symbols");
 
             if (!Uri.IsWellFormedUriString(url, UriKind.Absolute))
-                errors.Append("url is not valid");
+                errors.Add("url is not valid");
 
             if (addedAt.CompareTo(DateTime.Now) > 0)
-                errors.Append("added time if greater than now");
+                errors.Add("added time if greater than now");
 
             var TextBlock = new TextBlock(id, textFileName, url, addedAt, urlLifeCycle);
 

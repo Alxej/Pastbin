@@ -15,6 +15,6 @@ namespace Pastbin.DataAccess.Entites
         public string LastName { get; set; } = string.Empty;
         public string Surname { get; set; } = string.Empty;
 
-        public List<PostEntity> Posts { get; set; } = new List<PostEntity>();
+        public ICollection<PostEntity> Posts { get; set; }
     }
 }

@@ -26,10 +26,6 @@ namespace Pastbin.DataAccess.Configurations
 
             builder.Property(x => x.UrlLifeCycle)
                 .IsRequired();
-
-            builder.HasOne(x => x.Post)
-                .WithOne(x => x.Image)
-                .HasForeignKey("ImageEntity", "ImageId");
         }
     }
 }

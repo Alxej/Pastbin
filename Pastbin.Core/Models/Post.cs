@@ -26,12 +26,12 @@ namespace Pastbin.Core.Models
 
         public TextBlock? Text { get; } = null;
 
-        public (Post Post, List<string> Errors)  Create(Guid id, string header, User? author, Image? image, TextBlock? text)
+        public static (Post Post, List<string> Errors)  Create(Guid id, string header, User? author, Image? image, TextBlock? text)
         {
             var errors = new List<string>();
 
             if (header.Length > MAX_HEADER_LENGTH)
-                errors.Append("header length must be less than 65 symbols");
+                errors.Add("header length must be less than 65 symbols");
 
             return (new Post(id, header, author, image, text), errors);
         }

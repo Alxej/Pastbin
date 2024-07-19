@@ -22,20 +22,20 @@ namespace Pastbin.Core.Models
         public DateTime AddedAt { get; } = DateTime.Now;
         public TimeOnly UrlLifeCycle { get; } = TimeOnly.MinValue;
 
-        public (Image Image, List<string> Errors) Create(Guid id, string name, string url, DateTime addedAt, TimeOnly urlLifeCycle)
+        public static (Image Image, List<string> Errors) Create(Guid id, string name, string url, DateTime addedAt, TimeOnly urlLifeCycle)
         {
             var errors = new List<string>();
 
             var bannedSymbols = new List<char>() {'\\', '/', ':', '?', '\"', '<', '>', '|'};
 
             if (bannedSymbols.Any(x => name.Contains(x)))
-                errors.Append("image name contains banned symbols");
+                errors.Add("image name contains banned symbols");
 
             if (!Uri.IsWellFormedUriString(url, UriKind.Absolute))
-                errors.Append("url is not valid");
+                errors.Add("url is not valid");
 
             if (addedAt.CompareTo(DateTime.Now) > 0)
-                errors.Append("added time if greater than now");
+                errors.Add("added time if greater than now");
 
             var image = new Image(id, name, url, addedAt, urlLifeCycle);
 

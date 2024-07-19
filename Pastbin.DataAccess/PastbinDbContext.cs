@@ -20,5 +20,26 @@ namespace Pastbin.DataAccess
         public DbSet<ImageEntity> Images { get; set; }
         public DbSet<PostEntity> Posts { get; set; }
         public DbSet<TextBlockEntity> TextBlocks { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<UserEntity>()
+                .HasMany(e => e.Posts)
+                .WithOne(e => e.Author)
+                .HasForeignKey(e => e.Id);
+
+            modelBuilder.Entity<PostEntity>()
+                .HasOne(e => e.Image)
+                .WithOne(e => e.Post)
+                .HasForeignKey<PostEntity>(e => e.ImageId)
+                .IsRequired();
+
+            modelBuilder.Entity<PostEntity>()
+                .HasOne(e => e.Text)
+                .WithOne(e => e.Post)
+                .HasForeignKey<PostEntity>(e => e.TextBlockId)
+                .IsRequired();
+
+        }
     }
 }

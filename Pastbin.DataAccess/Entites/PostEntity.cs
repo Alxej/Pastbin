@@ -11,9 +11,9 @@ namespace Pastbin.DataAccess.Entites
     {
         public Guid Id { get; set; }
         public string Header { get; set; } = string.Empty;
-        public int AuthorId { get; set; }
-        public int ImageId { get; set; }
-        public int TextBlockId { get; set; }
+        public Guid AuthorId { get; set; }
+        public Guid ImageId { get; set; }
+        public Guid TextBlockId { get; set; }
         public UserEntity Author { get; set; }
 
         public ImageEntity Image { get; set; }
