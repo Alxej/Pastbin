@@ -70,7 +70,7 @@ namespace Pastbin.API.Controllers
             }
         }
 
-        [HttpDelete("{id:guid}"))]
+        [HttpDelete("{id:guid}")]
         public async Task<ActionResult<Guid>> DeleteUser(Guid id)
         {
             try
